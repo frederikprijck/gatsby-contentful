@@ -8,14 +8,14 @@ const IndexPage = ({data}) => (
   <Layout>
     <SEO title="Home" />
     <h1>Tv Shows</h1>
-    <Shows shows={data.allShowsJson.edges.map(edge => edge.node)} />
+    <Shows shows={data.allContentfulShow.edges.map(edge => edge.node)} />
   </Layout>
 );
 
 export default IndexPage;
 export const pageQuery = graphql`
   query {
-    allShowsJson {
+    allContentfulShow {
       edges {
         node {
           slug

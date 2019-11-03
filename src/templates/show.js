@@ -5,26 +5,28 @@ import Show from "../components/show";
 import SEO from "../components/seo";
 
 const ShowPage = ({ data }) => {
-  const show = data.allShowsJson.edges.map(edge => edge.node)[0];
+  const show = {
+    name: data.contentfulShow.name,
+    slug: data.contentfulShow.slug,
+    description: data.contentfulShow.description.description,
+  };
 
   return (
     <Layout>
-        <SEO title={show.name} />
-        <Show show={show}></Show>
-        <Link to="/">Back to Home</Link>
+      <SEO title={show.name} />
+      <Show show={show}></Show>
+      <Link to="/">Back to Home</Link>
     </Layout>
   )
 };
 export default ShowPage;
 export const pageQuery = graphql`
   query($slug: String!) {
-    allShowsJson(filter: { slug: { eq: $slug } }) {
-      edges {
-        node {
-          slug
-          name
-          description
-        }
+    contentfulShow(slug: { eq: $slug }) {
+      slug
+      name
+      description {
+        description
       }
     }
   }

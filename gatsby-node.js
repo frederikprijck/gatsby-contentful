@@ -10,7 +10,7 @@ exports.createPages = ({ graphql, actions }) => {
   return graphql(
     `
       {
-        allShowsJson {
+        allContentfulShow {
           edges {
             node {
               slug
@@ -22,7 +22,7 @@ exports.createPages = ({ graphql, actions }) => {
   )
     .then(result => {
       const showTemplate = path.resolve("./src/templates/show.js");
-      result.data.allShowsJson.edges.map(edge => edge.node).forEach(show => {
+      result.data.allContentfulShow.edges.map(edge => edge.node).forEach(show => {
         createPage({
           path: `/shows/${show.slug}/`,
           component: showTemplate,
